@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tareas Asignadas a {{ nombre_usuario }}</title>
+</head>
+<body>
+    <h1>Tareas Asignadas a {{ nombre_usuario }}</h1>
+    <ul>
+        {% for tarea in tareas_asignadas %}
+        <li>{{ tarea.get_nombre() }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

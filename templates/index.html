@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Tareas</title>
+</head>
+<body>
+	<h2>Usuarios <hr></h2>
+	<ul>
+	    {% for usuario in usuarios %}
+	    <li class="usuario">{{ usuario.get_nombre() }} - {{ usuario.get_email() }}</li>
+	    {% endfor %}
+	</ul>
+
+	<h2>Tareas <hr></h2>
+	{% for tarea in tareas %}
+	<div class="tarea">
+	    <p><strong>{{ tarea.get_nombre() }}</strong></p>
+	    <p>Descripción: {{ tarea.get_descripcion() }}</p>
+	    <p>Fecha Límite: {{ tarea.get_fecha_limite() }}</p>
+	    <p>Asignada a: {{ tarea.get_asignada_a().get_nombre() }}</p>
+	</div>
+	{% endfor %}
+	
+	<h2>Crear Nueva Tarea</h2>
+	<form method="post" action="/crear_tarea">
+	    <label for="nombre_tarea">Nombre de la Tarea:</label>
+	    <input type="text" id="nombre_tarea" name="nombre_tarea" required><br>
+	    <label for="descripcion_tarea">Descripción:</label>
+	    <textarea id="descripcion_tarea" name="descripcion_tarea" required></textarea><br>
+	    <label for="fecha_limite_tarea">Fecha Límite:</label>
+	    <input type="text" id="fecha_limite_tarea" name="fecha_limite_tarea" required><br>
+	    <label for="asignada_a">Asignada a:</label>
+	    <select id="asignada_a" name="asignada_a" required>
+	        {% for usuario in usuarios %}
+	        <option value="{{ usuario.get_nombre() }}">{{ usuario.get_nombre() }}</option>
+	        {% endfor %}
+	    </select><br>
+	    <input type="submit" value="Crear Tarea">
+	</form>
+</body>
+</html>
